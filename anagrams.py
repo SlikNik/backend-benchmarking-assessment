@@ -10,7 +10,7 @@ for an arbitrary list of strings.
 
 # Your name here, and any other people/sources who helped.
 # Give credit where credit is due.
-__author__ = "???"
+__author__ = "Nikal Morgan"
 
 import sys
 
@@ -36,11 +36,11 @@ def find_anagrams(words):
 
 
 def main(args):
-    # run find_anagrams() on first argument filename
+    # # run find_anagrams() on first argument filename
     if len(args) < 1:
         print("Please specify a word file!")
         sys.exit(1)
-
+    
     with open(args[0]) as f:
         words = f.read().split()
     anagram_dict = find_anagrams(words)

@@ -15,7 +15,10 @@ class TestAnagrams(unittest.TestCase):
     """
     def setUp(self):
         module_name = 'anagrams'
-        """import the module(s) under test, in the context of this test fixture"""
+        """
+        import the module(s) under test, 
+        in the context of this test fixture
+        """
         try:
             self.ana = importlib.import_module(module_name)
         except ImportError:
@@ -27,8 +30,8 @@ class TestAnagrams(unittest.TestCase):
         t = timeit.Timer(f)
         actual_time = round(t.timeit(number=1), 3)
         failure_text = (
-            f'\nfind_anagrams() took {actual_time:.03f} seconds, which exceeds the '
-            f'benchmark of {benchmark:.03f} seconds'
+            f'\nfind_anagrams() took {actual_time:.03f} seconds, which exceeds'
+            f' the benchmark of {benchmark:.03f} seconds'
             )
         self.assertLessEqual(actual_time, benchmark, failure_text)
 
@@ -39,7 +42,9 @@ class TestAnagrams(unittest.TestCase):
         actual_dict = self.ana.find_anagrams(short_list)
         self.assertIsInstance(actual_dict, dict)
         with open('tests/short_list.json') as f:
-            expected_dict = json.loads(f.read())
+            # json.loads take a string as input and returns a dictionary
+            # json.dumps take a dictionary as input and returns a string
+            expected_dict = json.loads(str(f.read()))
         self.assertDictEqual(actual_dict, expected_dict)
 
     def test_short(self):
