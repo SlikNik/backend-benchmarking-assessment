@@ -10,7 +10,7 @@ for an arbitrary list of strings.
 
 # Your name here, and any other people/sources who helped.
 # Give credit where credit is due.
-__author__ = "???"
+__author__ = "Nikal Morgan"
 
 import sys
 
@@ -27,20 +27,26 @@ def find_anagrams(words):
     Example:
     {'dgo': ['dog'], 'act': ['cat', 'act']}
     """
-    anagrams = {
-        alphabetize(word): [
-            w for w in words
-            if alphabetize(w) == alphabetize(word)]
-        for word in words}
+    anagrams = {}
+    for word in words:
+        if alphabetize(word) in anagrams:
+            anagrams[alphabetize(word)] += [word]
+        anagrams.setdefault(alphabetize(word), [word])
     return anagrams
+    # this function below is working on n^2
+    # anagrams = {
+    #     alphabetize(word): [
+    #         w for w in words
+    #         if alphabetize(w) == alphabetize(word)]
+    #     for word in words}
+    # return anagrams
 
 
 def main(args):
-    # run find_anagrams() on first argument filename
+    # # run find_anagrams() on first argument filename
     if len(args) < 1:
         print("Please specify a word file!")
         sys.exit(1)
-
     with open(args[0]) as f:
         words = f.read().split()
     anagram_dict = find_anagrams(words)
