@@ -12,6 +12,7 @@ for an arbitrary list of strings.
 # Give credit where credit is due.
 __author__ = "Nikal Morgan"
 
+from collections import defaultdict
 import sys
 
 
@@ -27,13 +28,21 @@ def find_anagrams(words):
     Example:
     {'dgo': ['dog'], 'act': ['cat', 'act']}
     """
-    anagrams = {}
-    for word in words:
-        if alphabetize(word) in anagrams:
-            anagrams[alphabetize(word)] += [word]
-        anagrams.setdefault(alphabetize(word), [word])
+    # medium way for create dict
+    # anagrams = {}
+    # for word in words:
+    #     if alphabetize(word) in anagrams:
+    #         anagrams[alphabetize(word)] += [word]
+    #     anagrams.setdefault(alphabetize(word), [word])
+
+    # short cut to create dict
+    anagrams = defaultdict(list)
+    [anagrams.setdefault(alphabetize(word), []).append(word) for word in words]
     return anagrams
+
+    # longer way to create dict
     # this function below is working on n^2
+    # because of the two loops which is n for each
     # anagrams = {
     #     alphabetize(word): [
     #         w for w in words
